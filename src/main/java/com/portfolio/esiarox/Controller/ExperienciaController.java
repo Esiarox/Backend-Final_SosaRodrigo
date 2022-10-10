@@ -55,7 +55,7 @@ public class ExperienciaController {
             return new ResponseEntity(new MensajeController("El nombre de la experiencia laboral es obligatorio"), HttpStatus.BAD_REQUEST);
         if(experienciaService.existsByNombreExp(experienciaDto.getNombreExp()))
             return new ResponseEntity(new MensajeController("Esta experiencia laboral ya existe"), HttpStatus.BAD_REQUEST);
-        Experiencia experiencia = new Experiencia(experienciaDto.getNombreExp(),experienciaDto.getDescripcion());
+        Experiencia experiencia = new Experiencia(experienciaDto.getNombreExp(),experienciaDto.getDescripcion(),experienciaDto.getDuracion());
         experienciaService.save(experiencia);
         
         return new ResponseEntity(new MensajeController("La experiencia laboral fue agregada correctamente"), HttpStatus.OK);
@@ -74,6 +74,7 @@ public class ExperienciaController {
         Experiencia experiencia = experienciaService.getExp(id).get();
         experiencia.setNombreExp(experienciaDto.getNombreExp());
         experiencia.setDescripcion(experienciaDto.getDescripcion());
+        experiencia.setDuracion(experienciaDto.getDuracion());
         experienciaService.save(experiencia);
         
         return new ResponseEntity(new MensajeController("La experiencia laboral fue actualizada correctamente"), HttpStatus.OK);

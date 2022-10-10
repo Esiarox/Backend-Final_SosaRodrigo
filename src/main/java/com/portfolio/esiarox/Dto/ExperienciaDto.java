@@ -15,13 +15,24 @@ public class ExperienciaDto {
     private String nombreExp;
     @NotBlank
     private String descripcion;
+    @NotBlank
+    private int duracion;
 
     public ExperienciaDto() {
     }
 
-    public ExperienciaDto(String nombreExp, String descripcion) {
+    public ExperienciaDto(String nombreExp, String descripcion, int duracion) {
         this.nombreExp = nombreExp;
         this.descripcion = descripcion;
+        this.duracion = duracion;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
     }
 
     public String getNombreExp() {

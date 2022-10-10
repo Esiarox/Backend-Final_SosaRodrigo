@@ -20,13 +20,15 @@ public class Experiencia {
     private int id;
     private String nombreExp;
     private String descripcion;
+    private int duracion;
 
     public Experiencia() {
     }
 
-    public Experiencia(String nombreExp, String descripcion) {
+    public Experiencia(String nombreExp, String descripcion, int duracion) {
         this.nombreExp = nombreExp;
         this.descripcion = descripcion;
+        this.duracion = duracion;
     }
 
     public int getId() {
@@ -47,6 +49,14 @@ public class Experiencia {
 
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
     }
 
     public void setDescripcion(String descripcion) {
