@@ -34,8 +34,8 @@ public class SkillService {
         return iSkillRepo.findByTitulo(titulo);
     }
     
-    public void save(Skill experiencia){
-        iSkillRepo.save(experiencia);
+    public void save(Skill skill){
+        iSkillRepo.save(skill);
     }
     
     public void delete(int id){
