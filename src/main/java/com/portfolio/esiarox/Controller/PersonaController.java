@@ -4,10 +4,14 @@
  */
 package com.portfolio.esiarox.Controller;
 
+import com.portfolio.esiarox.Dto.PersonaDto;
 import com.portfolio.esiarox.Entity.Persona;
 import com.portfolio.esiarox.Interface.IPersonaService;
+import com.portfolio.esiarox.Security.Controller.MensajeController;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,6 +42,7 @@ public class PersonaController {
         return ipersonaService.buscarPersona(1);
     }
     
+    
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/personas/crear")
     public String crearPersona(@RequestBody Persona persona){
@@ -53,16 +58,35 @@ public class PersonaController {
     }
     
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/personas/editar/{id}")
+    @PutMapping("/personas/editar2/{id}")
     public Persona editarPersona(@PathVariable Integer id,@RequestParam("nombre") String nuevoNombre,
                                                           @RequestParam("apellido") String nuevoApellido,
-                                                          @RequestParam("imagen") String nuevaImagen){
+                                                          @RequestParam("imagen") String nuevaImagen,
+                                                          @RequestParam("titulo") String nuevoTitulo,
+                                                          @RequestParam("acercaDe") String nuevoAcercaDe){
         Persona persona = ipersonaService.buscarPersona(id);
         persona.setNombre(nuevoNombre);
         persona.setApellido(nuevoApellido);
         persona.setImagen(nuevaImagen);
-        
+        persona.setTitulo(nuevoTitulo);
+        persona.setAcercaDe(nuevoAcercaDe);
         ipersonaService.guardarPersona(persona);
         return persona;
+    }
+    
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/personas/editar/{id}")
+    public ResponseEntity<?> editarPer(@PathVariable("id") int id,@RequestBody PersonaDto personaDto){
+ 
+        Persona persona = ipersonaService.buscarPersona(id);
+        persona.setNombre(personaDto.getNombre());
+        persona.setApellido(personaDto.getApellido());
+        persona.setImagen(personaDto.getImagen());
+        persona.setTitulo(personaDto.getTitulo());
+        persona.setAcercaDe(personaDto.getAcercaDe());
+        persona.setImagenBanner(personaDto.getImagenBanner());
+        ipersonaService.guardarPersona(persona);
+        
+        return new ResponseEntity(new MensajeController("La información fue actualizada correctamente"), HttpStatus.OK);
     }
 }

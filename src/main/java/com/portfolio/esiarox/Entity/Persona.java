@@ -33,7 +33,11 @@ public class Persona {
     @Size(min=1, max=50, message = "error de longitud de caracteres")
     private String apellido;
     
+    private String titulo;
+    
     private String imagen;     
     
+    private String imagenBanner; 
     
+    private String acercaDe;
 }
