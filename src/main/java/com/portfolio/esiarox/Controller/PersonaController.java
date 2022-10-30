@@ -74,7 +74,6 @@ public class PersonaController {
         return persona;
     }
     
-    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/personas/editar/{id}")
     public ResponseEntity<?> editarPer(@PathVariable("id") int id,@RequestBody PersonaDto personaDto){
  
